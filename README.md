@@ -313,12 +313,25 @@ Personal Expense Tracker with Data Visualization/
 $$\text{NCF} = I - E = ₹3,042,397.35 - ₹1,957,390.53 = ₹1,085,006.82$$
 Represents net operational cash surplus generated over the observation period.
 
-### 8.3 Operational Cash Surplus Margin ($M_s$)
-$$M_s = \begin{cases} \left( \frac{I - E}{I} \right) \times 100\%, & \text{if } I > 0 \\ \text{N/A}, & \text{if } I = 0 \end{cases}$$
+### ### 8.3 Operational Cash Surplus Margin (`M_s`)
+
+$$
+M_s =
+\begin{cases}
+\left( \frac{I - E}{I} \right) \times 100\%, & \text{if } I > 0 \\
+\text{N/A}, & \text{if } I = 0
+\end{cases}
+$$
+
 Evaluated across the 45-month period: **35.66%**.
 
 ### 8.4 Daily Average Burn Rate ($B_d$)
-$$B_d = \frac{E}{N_{\text{calendar\_days}}} = \frac{₹1,957,390.53}{1,359 \text{ days}} = ₹1,440.32 / \text{day}$$
+$$
+B_d = \frac{E}{N_{\text{calendar days}}}
+= \frac{₹1,957,390.53}{1,359\text{ days}}
+= ₹1,440.32 / \text{day}
+$$
+
 Uses the total calendar day span ($T_{\max} - T_{\min} + 1 = 1,359 \text{ days}$) as the denominator, avoiding upward distortion from active-day counting.
 
 ### 8.5 Weekday vs. Weekend Daily Spend
