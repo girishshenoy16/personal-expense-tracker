@@ -1,0 +1,767 @@
+:root {
+  /* Power BI Design Tokens — Enhanced Contrast & Legibility */
+  --paper: #f8fafc;         /* Light Slate Canvas */
+  --card: #ffffff;          /* Pure White Card Containers */
+  --ink: #0f172a;           /* Deep Navy / Slate 900 */
+  --mute: #475569;          /* Slate 600 - High contrast accessible captions & labels */
+  --mute-light: #64748b;    /* Slate 500 */
+  --rule: #e2e8f0;          /* Slate 200 Subtle Rule / Border */
+  --income: #059669;        /* Emerald 600 - Crisp contrast on white */
+  --expense: #dc2626;       /* Crimson 600 - Crisp contrast on white */
+  --invest: #2563eb;        /* Cobalt 600 - Crisp contrast on white */
+  --income-bg: #ecfdf5;     /* Emerald 50 */
+  --expense-bg: #fef2f2;    /* Red 50 */
+  --invest-bg: #eff6ff;     /* Blue 50 */
+  --gold: #d97706;          /* Amber 600 Accent */
+  --brand-blue: #0284c7;    /* Primary Brand Blue */
+  --brand-blue-hover: #0369a1;
+  --shadow-subtle: 0 1px 3px 0 rgba(15, 23, 42, 0.08), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 2px 4px 0 rgba(15, 23, 42, 0.05), 0 1px 2px 0 rgba(15, 23, 42, 0.03);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Inter', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+/* Centered Main Dashboard Container */
+.dashboard-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 1. Header Section — Preserved Original Layout & Alignment */
+header {
+  padding: 24px 32px 16px;
+}
+
+.ledger-tab {
+  display: inline-block;
+  background: var(--ink);
+  color: #ffffff;
+  font-family: 'Segoe UI', -apple-system, sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 4px 4px 0 0;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 0;
+  background: var(--card);
+  padding: 20px 28px;
+  border: 1px solid var(--rule);
+  border-radius: 0 8px 8px 8px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.main-title {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.sub-title {
+  font-size: 13.5px;
+  color: var(--mute);
+  margin-top: 5px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.period-tag {
+  font-family: 'Segoe UI', 'IBM Plex Mono', monospace;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--brand-blue);
+  text-align: right;
+  line-height: 1.6;
+}
+
+/* 2. Toolbar & Slicers — Preserved Original Left-Flow with Right Toggle */
+.toolbar {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  margin: 0 32px 22px;
+  padding: 16px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  box-shadow: var(--shadow-subtle);
+}
+
+.tb-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tb-label {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #334155;
+  text-align: left;
+}
+
+select {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13.5px;
+  height: 35px;
+  padding: 6px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--ink);
+  min-width: 130px;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+.reset-btn {
+  height: 35px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.reset-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.view-toggle {
+  display: flex;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-left: auto; /* Pushed to right edge */
+  height: 35px;
+  box-sizing: border-box;
+}
+
+.view-toggle button {
+  border: none;
+  background: #ffffff;
+  color: var(--mute);
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 0 15px;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.view-toggle button.active {
+  background: var(--ink);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+main {
+  padding: 0 32px 60px;
+}
+
+/* 3. KPI Ledger Strip — Refined Balanced Content */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+  margin-bottom: 22px;
+}
+
+.kpi-cell {
+  padding: 18px 16px;
+  border-right: 1px solid var(--rule);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.kpi-cell:last-child {
+  border-right: none;
+}
+
+.kpi-label {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--mute);
+  text-align: center;
+}
+
+.kpi-value {
+  font-family: 'Segoe UI', -apple-system, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 6px;
+  letter-spacing: -0.3px;
+  text-align: center;
+}
+
+.kpi-value.income {
+  color: var(--income);
+}
+
+.kpi-value.expense {
+  color: var(--expense);
+}
+
+.kpi-value.invest {
+  color: var(--invest);
+}
+
+.kpi-sub {
+  font-size: 12px;
+  color: var(--mute-light);
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* 4. Auto-Generated Insights Card — Preserved Left Accent & Left Alignment */
+.insights {
+  background: #ffffff;
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--brand-blue);
+  border-radius: 8px;
+  padding: 16px 22px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.insights-title {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #0369a1;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 10px 24px;
+}
+
+.insight-item {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #1e293b;
+  display: flex;
+  gap: 8px;
+  text-align: left;
+}
+
+.insight-idx {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: #0369a1;
+  flex-shrink: 0;
+}
+
+/* 5. Chart Cards — Balanced Headings and Layout */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 18px 20px 16px;
+  box-shadow: var(--shadow-card);
+  min-width: 0;
+}
+
+.card-title {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.2px;
+  text-align: center; /* Balanced centered title above chart */
+}
+
+.card-body {
+  height: 260px;
+  min-height: 260px;
+  position: relative;
+  margin-top: 10px;
+  min-width: 0;
+  width: 100%;
+}
+
+canvas {
+  max-width: 100%;
+}
+
+.card-note {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #f1f5f9;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center; /* Balanced centered note below chart */
+  line-height: 1.4;
+}
+
+/* 6. Drill-Down Aggregate Table — Preserved Left Title & Right Close Button */
+.drill {
+  background: var(--card);
+  border: 1px solid var(--brand-blue);
+  border-radius: 8px;
+  padding: 18px 22px;
+  display: none;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.08);
+}
+
+.drill.show {
+  display: block;
+}
+
+.drill-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.drill-title {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: left;
+}
+
+.drill-close {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--ink);
+  transition: background 0.15s ease;
+}
+
+.drill-close:hover {
+  background: #e2e8f0;
+}
+
+/* 7. Aggregated Data Explorer — Preserved Original Head Alignment */
+.explorer-section {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 20px 22px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.explorer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.explorer-title {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 17.5px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.2px;
+  text-align: left;
+}
+
+.explorer-subtitle {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12.5px;
+  color: var(--mute);
+  margin-top: 4px;
+  text-align: left;
+}
+
+.export-btn {
+  background: var(--brand-blue);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  flex-shrink: 0;
+  box-shadow: 0 1px 2px 0 rgba(2, 132, 199, 0.2);
+}
+
+.export-btn:hover {
+  background: var(--brand-blue-hover);
+  box-shadow: 0 2px 4px 0 rgba(2, 132, 199, 0.3);
+}
+
+.explorer-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  text-align: center;
+}
+
+#explorerTable {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.explorer-table-wrap th,
+.explorer-table-wrap td {
+  text-align: center;
+}
+
+/* Compact Integrated Pagination Footer — Center Aligned */
+.explorer-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px 2px 2px;
+  border-top: 1px solid var(--rule);
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.pagination-info {
+  font-family: 'Segoe UI', -apple-system, sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--mute);
+  letter-spacing: 0.2px;
+  text-align: center;
+}
+
+.pagination-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.page-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  height: 32px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+  box-shadow: 0 1px 3px 0 rgba(2, 132, 199, 0.15);
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: #e2e8f0;
+  background: #f8fafc;
+  color: #94a3b8;
+  box-shadow: none;
+}
+
+.btn-chevron {
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.page-indicator {
+  font-family: 'Consolas', 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+  padding: 0 6px;
+  user-select: none;
+}
+
+.explorer-note {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--rule);
+  text-align: center;
+}
+
+/* Tables — Preserved Data Readability */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+thead tr {
+  border-bottom: 2px solid var(--rule);
+  background: #f8fafc;
+}
+
+th {
+  padding: 10px 14px;
+  text-align: left;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #334155;
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+}
+
+tr:hover td {
+  background: #f8fafc;
+}
+
+.amt {
+  font-family: 'Consolas', 'IBM Plex Mono', monospace;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.amt.income {
+  color: var(--income);
+}
+
+.amt.expense {
+  color: var(--expense);
+}
+
+.amt.invest {
+  color: var(--invest);
+}
+
+.type-tag {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 11.5px;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Footer Attribution Note */
+.footer-note {
+  margin-top: 36px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12.5px;
+  color: var(--mute);
+  line-height: 1.6;
+}
+
+.footer-disclaimer {
+  margin-top: 5px;
+  font-size: 12px;
+  font-style: italic;
+  color: #64748b;
+  text-align: center;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1150px) {
+  .grid2, .grid3 {
+    grid-template-columns: 1fr;
+  }
+  .kpi-strip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .kpi-cell {
+    border-bottom: 1px solid var(--rule);
+  }
+  header, main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .toolbar {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+}
+
+@media (max-width: 680px) {
+  .kpi-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .tb-group {
+    width: 100%;
+    align-items: stretch;
+  }
+  .tb-label {
+    text-align: left;
+  }
+  select {
+    width: 100%;
+    height: 36px;
+  }
+  .reset-btn {
+    width: 100%;
+    height: 36px;
+    text-align: center;
+    justify-content: center;
+  }
+  .view-toggle {
+    width: 100%;
+    height: 36px;
+    margin-left: 0;
+    justify-content: center;
+  }
+  .title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 20px;
+  }
+  .period-tag {
+    text-align: left;
+    margin-top: 6px;
+  }
+  .explorer-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .export-btn {
+    width: 100%;
+    text-align: center;
+  }
+  .explorer-pagination {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .pagination-info {
+    text-align: center;
+  }
+  .pagination-nav {
+    width: 100%;
+    justify-content: center;
+  }
+  .page-btn {
+    flex: 1;
+    max-width: 130px;
+    height: 34px;
+  }
+}
+
+@media (max-width: 480px) {
+  .kpi-strip {
+    grid-template-columns: 1fr;
+  }
+}

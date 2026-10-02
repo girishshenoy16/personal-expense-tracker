@@ -1,0 +1,6 @@
+# Minimum supported versions for data engineering, analysis, and static plotting
+pandas>=2.0.0
+matplotlib>=3.7.0
+
+# Automated Quality Assurance & Testing Framework
+pytest>=7.4.0

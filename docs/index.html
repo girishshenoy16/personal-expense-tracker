@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Expense Tracker — Power BI Analytics Dashboard</title>
+  
+  <!-- External Google Fonts & Fallbacks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Dashboard Styling -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <div class="dashboard-wrapper">
+    <header>
+      <div class="ledger-tab">Executive Analytics</div>
+      <div class="title-row">
+        <div>
+          <div class="main-title">Personal Expense Tracker with Data Visualization</div>
+          <div class="sub-title">Personal Finance Intelligence · Income, Expense &amp; Transfer Outflows (Jan 2015 – Sep 2018)</div>
+        </div>
+        <div class="period-tag" id="periodTag">Loading data...</div>
+      </div>
+    </header>
+
+  <!-- Interactive Slicer Toolbar -->
+  <div class="toolbar" id="toolbar">
+    <div class="tb-group">
+      <span class="tb-label">Year</span>
+      <select id="selYear" aria-label="Filter by Year"></select>
+    </div>
+    <div class="tb-group">
+      <span class="tb-label">Month</span>
+      <select id="selMonth" aria-label="Filter by Month"></select>
+    </div>
+    <div class="tb-group">
+      <span class="tb-label">Type</span>
+      <select id="selType" aria-label="Filter by Transaction Type"></select>
+    </div>
+    <div class="tb-group">
+      <span class="tb-label">Category</span>
+      <select id="selCat" aria-label="Filter by Category"></select>
+    </div>
+    <div class="tb-group">
+      <span class="tb-label">Payment Mode</span>
+      <select id="selMode" aria-label="Filter by Payment Mode"></select>
+    </div>
+    <div class="tb-group">
+      <span class="tb-label">Day</span>
+      <select id="selWknd" aria-label="Filter by Day Type">
+        <option value="">All days</option>
+        <option value="wk">Weekday</option>
+        <option value="we">Weekend</option>
+      </select>
+    </div>
+    <button class="reset-btn" id="resetBtn" title="Reset all filters">Reset</button>
+    <div class="view-toggle" id="viewToggle">
+      <button class="active" data-mode="total">Total Period</button>
+      <button data-mode="avg">Monthly Avg</button>
+    </div>
+  </div>
+
+  <main>
+    <!-- Reactive KPI Ledger Strip -->
+    <div class="kpi-strip" id="kpiStrip"></div>
+
+    <!-- Automated Executive Insights -->
+    <div class="insights">
+      <div class="insights-title">Auto-generated insights</div>
+      <div class="insight-grid" id="insightsGrid"></div>
+    </div>
+
+    <!-- Row 1: Trend & Type Split -->
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">Monthly Income vs Expense vs Investment</div>
+        <div class="card-body"><canvas id="chartTrend"></canvas></div>
+        <div class="card-note">Cash flow trend across the tracked period</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Transaction Type Split</div>
+        <div class="card-body"><canvas id="chartTypeDonut"></canvas></div>
+        <div class="card-note" id="typeDonutNote">Share of total ₹ by transaction type</div>
+      </div>
+    </div>
+
+    <!-- Row 2: Top Categories & Payment Modes -->
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">Top 10 Spending Categories</div>
+        <div class="card-body"><canvas id="chartTopCat"></canvas></div>
+        <div class="card-note">Click a bar to inspect subcategory breakdown below</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Spend by Payment Mode</div>
+        <div class="card-body"><canvas id="chartPaymentMode"></canvas></div>
+        <div class="card-note">Where the money physically moves from</div>
+      </div>
+    </div>
+
+    <!-- Row 3: Weekday/Weekend & Net Savings -->
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">Weekday vs Weekend Spending</div>
+        <div class="card-body"><canvas id="chartWeekend"></canvas></div>
+        <div class="card-note">Average expense amount, weekday vs weekend</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Monthly Net Savings</div>
+        <div class="card-body"><canvas id="chartNetSavings"></canvas></div>
+        <div class="card-note">Income minus expense, by month</div>
+      </div>
+    </div>
+
+    <!-- Row 4: YoY & Investment Allocation -->
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">Year-over-Year Spend Comparison</div>
+        <div class="card-body"><canvas id="chartYoY"></canvas></div>
+        <div class="card-note">Total expense by calendar year</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Investment Allocation by Instrument</div>
+        <div class="card-body"><canvas id="chartInvestDonut"></canvas></div>
+        <div class="card-note">Where Transfer-Out money goes</div>
+      </div>
+    </div>
+
+    <!-- Row 5: Day of Week & Frequency-Value Bubble -->
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">Day-of-Week Spending Pattern</div>
+        <div class="card-body"><canvas id="chartDayOfWeek"></canvas></div>
+        <div class="card-note">Daily average spend distribution across week</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Transaction Frequency vs Value by Category</div>
+        <div class="card-body"><canvas id="chartFreqValue"></canvas></div>
+        <div class="card-note">Bubble size = total ₹ · frequent-small vs rare-large spends</div>
+      </div>
+    </div>
+
+    <!-- Row 6: Cumulative Position Area -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title">Cumulative Net Position</div>
+      <div class="card-body"><canvas id="chartCumulative"></canvas></div>
+      <div class="card-note">Running total of income minus expense minus investment outflow over time</div>
+    </div>
+
+    <!-- Drill-Down Aggregate Table -->
+    <div class="drill" id="drillPanel">
+      <div class="drill-head">
+        <div class="drill-title" id="drillTitle">Category Breakdown</div>
+        <button class="drill-close" id="drillClose">Close</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Subcategory</th>
+            <th>Spend (₹)</th>
+            <th>Transactions</th>
+            <th>% of Category</th>
+          </tr>
+        </thead>
+        <tbody id="drillBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Aggregated Data Explorer (separate from drill-down) -->
+    <div class="explorer-section" id="explorerSection">
+      <div class="explorer-head">
+        <div>
+          <div class="explorer-title">Aggregated Data Explorer</div>
+          <div class="explorer-subtitle" id="explorerSubtitle">Category-level spend summary · responds to Year &amp; Category filters</div>
+        </div>
+        <button class="export-btn" id="exportCsvBtn" title="Download aggregated data as CSV">
+          ↓ Export CSV
+        </button>
+      </div>
+      <div class="explorer-table-wrap">
+        <table id="explorerTable">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Total Spend (₹)</th>
+              <th>Transactions</th>
+              <th>% of Expenses</th>
+              <th>Avg per Transaction (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="explorerBody"></tbody>
+        </table>
+      </div>
+      <!-- Compact Integrated Pagination Footer -->
+      <div class="explorer-pagination" id="explorerPagination">
+        <div class="pagination-info" id="paginationInfo">Showing 1–5 of 27 categories</div>
+        <div class="pagination-nav">
+          <button class="page-btn page-btn-prev" id="prevPageBtn" title="Previous page" aria-label="Previous page" disabled>
+            <span class="btn-chevron">‹</span> Previous
+          </button>
+          <span class="page-indicator" id="pageIndicator">1 / 6</span>
+          <button class="page-btn page-btn-next" id="nextPageBtn" title="Next page" aria-label="Next page">
+            Next <span class="btn-chevron">›</span>
+          </button>
+        </div>
+      </div>
+      <div class="explorer-note" id="explorerNote"></div>
+    </div>
+
+    <!-- Compact Footer Attribution & Disclaimer -->
+    <footer class="footer-note" id="footerNote">
+      <div id="footerAttrText">Dataset Source: Daily Household Transactions (Kaggle) · Period: 2015-01-01 – 2018-09-20 (1,359 calendar days) · Currency: INR (₹) · Built By Girish Shenoy</div>
+      <div class="footer-disclaimer" id="footerDisclaimer">This dashboard presents pre-aggregated analytical summaries for portfolio and educational review. Zero transaction-level records, individual purchase amounts, or personal notes are published.</div>
+    </footer>
+  </main>
+  </div>
+
+  <!-- Authoritative Pre-Aggregated Data Payload -->
+  <script src="data.js"></script>
+  <!-- Application Logic -->
+  <script src="app.js" defer></script>
+</body>
+</html>
